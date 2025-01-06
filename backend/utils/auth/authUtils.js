@@ -1,22 +1,40 @@
 import jwt from "jsonwebtoken";
+import secretKey from '../jwt.js';
 
 
-const generatedToken = (user) => {
+export default function generatedToken(user){
     // return jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, {
     //     expiresIn: '1d'
     // });
 
     const payload = {
         id: user._id,
-        email: user.email
     }
-    return jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: '1d'
+    const token = jwt.sign(payload, 'secretKey', {
+        expiresIn: '1h'
     });
+    return token;
 }
 
-function verifyToken(token) {
-    return jwt.verify(token, process.env.JWT_SECRET);
+export function generatedRefreshToken(user){
+    // return jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, {
+    //     expiresIn: '1d'
+    // });
+
+    const payload = {
+        id: user._id,
+    }
+    const token = jwt.sign(payload, secretKey, {
+        expiresIn: '7h'
+    });
+    return token;
 }
 
-export default {generatedToken, verifyToken};
+export function verifyToken(token) {
+    try {
+        const verify = jwt.verify(token, 'secretKey');
+        return verify;
+    }catch (error) {
+        return null;
+    }
+}

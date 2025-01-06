@@ -11,11 +11,13 @@ dotenv.config();
 
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 
 
 
+app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 // app.get("/", (req,res) => {
 //     res.send("Bienvenu sur mon backend");
 // })
@@ -26,8 +28,7 @@ connectDB()
 //     .catch(() => console.log("Connexion à la base de données échouée"));
 
 app.use(routes);
-app.use(bodyParser.json());
-app.use(cors());
+
 
 
 app.listen(port, () => {

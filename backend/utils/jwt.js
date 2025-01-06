@@ -1,5 +1,5 @@
 import crypto from 'crypto';
 
-const secretKey = crypto.randomBytes(32).toString('hex');
+const secretKey = crypto.randomBytes(64).toString('hex');
 
-export default {secretKey};
+export default {secretKey: secretKey};
