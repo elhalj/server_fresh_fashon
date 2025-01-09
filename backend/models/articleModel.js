@@ -2,11 +2,12 @@
 import mongoose from "mongoose";
 
 const articleShema = new mongoose.Schema({
-    nom:String,
-    type:String,
-    categorie:String,
-    prix:String,
-    image:String,
+    name:{type:String, require:true},
+    image:{type:String, require:true},
+    price:{type:String, require:true},
+    category:{type:String, require:true},
+    description:{type:String, require:true},
+    stock:{type:Number, require:true},
     date:{
         type:Date,
         default:Date.now(),

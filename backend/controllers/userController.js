@@ -56,7 +56,7 @@ export async function login(req, res) {
         res.status(200).json({ message: "Connexion réussie", user: user, token: token });
     }
     catch (error) {
-        res.status(401).json({ erreur: error.message });
+        res.status(404).json({ erreur: error.message, message:"utilisateur inconnu" });
     }
 
 }

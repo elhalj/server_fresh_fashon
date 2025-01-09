@@ -4,27 +4,28 @@ import mongoose from "mongoose";
 
 
 
-export async function connectDB() {
+// export async function connectDB() {
+//     try {
+//         await mongoose.set("strictQuery",false);
+//         // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
+//         await mongoose.connect("mongodb://localhost:27017/produit");
+//         console.log("Pinged your deployment. You successfully connected to MongoDB!");
+//     } catch (error) {
+//         console.log('erreur de connection ', error)
+//     }
+// }
+
+export const connectDB = async () => {
     try {
-        await mongoose.set("strictQuery",false);
-        // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
-        await mongoose.connect("mongodb://localhost:27017/produit");
-        console.log("Pinged your deployment. You successfully connected to MongoDB!");
+        console.log('uri mongo: ', process.env.MONGO_URI)
+        const db = await mongoose.connect(process.env.MONGO_URL)
+        console.log(`MongoDb connected: ${db.connection.host}`)
     } catch (error) {
         console.log('erreur de connection ', error)
+        process.exit(1)
     }
 }
 
-// export const connectDB = async () => {
-//     try {
-//         console.log('uri mongo: ', process.env.MONGO_URI)
-//         const db = await mongoose.connect("mongodb+srv://:mqI9Qy@backend.pahry.mongodb.net/?retryWrites=true&w=majority&appName=backend")
-//         console.log(`MongoDb connected: ${db.connection.host}`)
-//     } catch (error) {
-//         console.log('erreur de connection ', error)
-//         process.exit(1)
-//     }
-// }
 
 // class Database {
 //     constructor(){

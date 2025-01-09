@@ -4,15 +4,15 @@ import ArticleModel from "../models/articleModel.js";
 // fonction ajouter un article
 export async function addArticle(req, res) {
     try {
-        const { nom, type, categorie, prix, image } = req.body;
+        const { name, image, price, category, description, stock } = req.body;
 
         // Vérifiez que les données sont présentes
-        if (!nom || !type || !categorie || !prix || !image) {
+        if (!name || !image || !price || !category|| !description || !stock) {
             return res.status(400).json({ erreur: "Tous les champs sont obligatoires" });
         }
 
         const response = await ArticleModel.create({
-            nom, type, categorie, prix, image
+            name, image, price, category, description, stock
         });
         
         console.log("Enregistré avec succès");
@@ -56,13 +56,13 @@ export async function deletById(req,res) {
 export async function updateById(req,res) {
     try {
         const id = req.params.id;
-        const { nom, type, categorie, prix, image } = req.body;
+        const { name, image, price, category, description, stock } = req.body;
 
-        if (!nom || !type || !categorie || !prix || !image) {
+        if (!name|| !image || !price || !category || !description || !stock) {
             return res.status(400).json({ erreur: "Tous les champs sont obligatoires" });
         }
 
-        const response = await ArticleModel.findByIdAndUpdate({ _id: id }, { nom, type, categorie, prix, image }, { new: true });
+        const response = await ArticleModel.findByIdAndUpdate({ _id: id }, { nom, type, price, price, image }, { new: true });
 
         if(!response) {
             return res.status(404).json({ message: "Aucun article trouvé" });

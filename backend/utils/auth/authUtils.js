@@ -9,6 +9,7 @@ export default function generatedToken(user){
 
     const payload = {
         id: user._id,
+        email: user.email
     }
     const token = jwt.sign(payload, 'secretKey', {
         expiresIn: '1h'
@@ -23,6 +24,7 @@ export function generatedRefreshToken(user){
 
     const payload = {
         id: user._id,
+        email: user.email
     }
     const token = jwt.sign(payload, secretKey, {
         expiresIn: '7h'
